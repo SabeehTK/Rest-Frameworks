@@ -18,17 +18,20 @@ from django.contrib import admin
 from django.urls import path,include
 from myapp import views
 from rest_framework.routers import DefaultRouter
-from myapp.views import BookViewSet,UserView
+from rest_framework.authtoken import views as view1
 
 router = DefaultRouter()
-router.register('books', BookViewSet)
-router.register('user', UserView)
+router.register('books',views.BookViewSet)
+router.register('user',views.UserView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('',views.ViewBooks.as_view()),
     # path('bookdetail/<int:pk>',views.ViewBookDetail.as_view()),
     path('',include(router.urls)),
+    path('search',views.Searchview.as_view()),
+    path('login/', view1.obtain_auth_token),
+    path('logout/',views.LogoutView.as_view()),
 ]
 from django.conf.urls.static import static
 from django.conf import settings

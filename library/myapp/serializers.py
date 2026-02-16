@@ -3,6 +3,7 @@ from rest_framework import serializers
 from myapp.models import Books
 
 class BookSerializer(serializers.ModelSerializer):
+    image=serializers.ImageField(required=False)
     class Meta:
         model= Books
         fields = '__all__'
